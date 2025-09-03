@@ -15,5 +15,8 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "@postgresql://neondb_owner:npg_nKLxrtNqS78k@ep-blue-sunset-ad4hc9vl-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+  }
 }
