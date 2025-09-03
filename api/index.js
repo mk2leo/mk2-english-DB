@@ -1,8 +1,8 @@
 const { neon } = require('@neondatabase/serverless');
 const cors = require('cors');
 
-// 初始化Neon数据库连接
-const sql = neon(process.env.DATABASE_URL);
+// 直接在代码中设置数据库连接字符串
+const sql = neon('postgresql://neondb_owner:npg_VHwWRdXzp3a2@ep-lucky-butterfly-ado9tuza-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require');
 
 // 生成唯一ID
 function generateId() {
@@ -152,6 +152,10 @@ const corsHandler = cors({
 
 // API处理函数
 async function handler(req, res) {
+  // 确保数据库已初始化
+  await initDatabase();
+  await ensureSampleData();
+  
   // 处理CORS预检请求
   if (req.method === 'OPTIONS') {
     return corsHandler(req, res, () => {
@@ -223,9 +227,5 @@ async function handler(req, res) {
   });
 }
 
-// 初始化数据库
-initDatabase().then(() => {
-  ensureSampleData();
-});
-
 module.exports = handler;
+    
