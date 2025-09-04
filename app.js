@@ -24,8 +24,6 @@
   const quizScoreEl = document.getElementById('quiz-score')
   const wordFormSectionEl = document.querySelector('.word-form')
   const wordListSectionEl = document.querySelector('.word-list-section')
-  const exportJsonBtn = document.getElementById('export-json-btn')
-  const importJsonInput = document.getElementById('import-json-input')
   const wordCountEl = document.getElementById('word-count')
 
   // 狀態
@@ -366,52 +364,6 @@
   startQuizBtn.addEventListener('click', startQuiz);
   exitQuizBtn.addEventListener('click', exitQuiz);
   submitQuizBtn.addEventListener('click', submitQuiz);
-  
-  exportJsonBtn.addEventListener('click', async ()=>{
-    try {
-      const data = await apiGet('/backup');
-      const blob = new Blob([JSON.stringify(data,null,2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'vocab-backup.json';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    } catch (err) {
-      console.error('Export failed', err);
-      alert('备份失败');
-    }
-  });
-  
-  importJsonInput.addEventListener('change', async (e)=>{
-    const file = e.target.files?.[0];
-    if(!file) return;
-    
-    try{
-      const text = await file.text();
-      const data = JSON.parse(text);
-      
-      if(!Array.isArray(data.topics) || typeof data.wordsByTopicId !== 'object'){
-        alert('匯入檔格式不正確');
-        return;
-      }
-      
-      await apiPost('/import', {
-        topics: data.topics,
-        wordsByTopicId: data.wordsByTopicId
-      });
-      
-      // 重新加载数据
-      await load();
-      e.target.value = '';
-      alert('匯入完成');
-    }catch(err){
-      console.error(err);
-      alert('匯入失敗');
-    }
-  });
 
   // 工具
   function escapeHtml(str){
