@@ -10,8 +10,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,s
 .topic-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
 .topic-item{display:flex;justify-content:space-between;align-items:center;background:var(--muted);border:1px solid var(--border);padding:8px;border-radius:6px;cursor:pointer;gap:6px}
 .topic-item .topic-actions{display:flex;gap:4px}
-.sidebar-footer{position:sticky;bottom:0;display:flex;gap:6px;padding-top:8px;margin-top:8px;background:linear-gradient(180deg, rgba(17,24,39,0) 0%, rgba(17,24,39,1) 20%);border-top:1px solid var(--border)}
-.upload-label{display:inline-flex;align-items:center;gap:4px}
+
 .topic-item.active{outline:2px solid var(--secondary)}
 .main{display:flex;flex-direction:column;height:100vh;overflow:auto}
 .main-header{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid var(--border);background:var(--panel)}
