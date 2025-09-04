@@ -4,7 +4,7 @@
 
 ;(function(){
   // API 基础地址
-  const API_BASE_URL = 'http://mk2home.asuscomm.com:3000/api';
+  const API_BASE_URL = 'https://3000api.mk2leo.com/api';
   
   /** @type {HTMLUListElement} */
   const topicListEl = document.getElementById('topic-list')
