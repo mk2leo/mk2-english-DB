@@ -1,4 +1,4 @@
-// 基本資料結構：11
+// 基本資料結構：
 // topics: [{ id, name }]
 // wordsByTopicId: { [topicId]: [{ id, en, zh, audioUrl? }] }
 
@@ -26,6 +26,7 @@
   const wordListSectionEl = document.querySelector('.word-list-section')
   const exportJsonBtn = document.getElementById('export-json-btn')
   const importJsonInput = document.getElementById('import-json-input')
+  const wordCountEl = document.getElementById('word-count')
 
   // 狀態
   const state = {
@@ -147,6 +148,12 @@
   function renderWords(){
     wordListEl.innerHTML = '';
     const words = state.wordsByTopicId[state.currentTopicId] || [];
+    
+    // 更新单词数量显示
+    if (wordCountEl) {
+      wordCountEl.textContent = `${words.length}單詞`;
+    }
+    
     words.forEach(w => {
       const li = document.createElement('li');
       li.className = 'word-card';
